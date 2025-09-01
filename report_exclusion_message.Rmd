@@ -1,0 +1,16 @@
+---
+title: "Dataset Excluded"
+output: html_document
+params:
+  file_name: "unknown"
+  report_date: "unknown"
+---
+
+```{r, echo=FALSE, results='asis'}
+htmltools::HTML(sprintf(
+  "<div style='padding:1em; background-color:#f8d7da; color:#721c24; border-radius:5px;'>
+  <strong>⚠️ Dataset '%s' has been marked as 'not included'</strong><br>
+  No quality control report was generated.
+  </div>",
+  params$file_name
+))
