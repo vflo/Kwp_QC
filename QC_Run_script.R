@@ -2,9 +2,12 @@
 # Data Quality Report Runner
 # This script generates a detailed quality control report for a dataset
 # formatted according to a predefined structure. It outputs an HTML file
-# (and optionally a PDF) in the /reports folder.
+# in the /reports folder.
 # ------------------------------------------------------------------------------
-
+# install.packages("rmarkdown")
+# install.packages("sass")
+# install.packages("writexl")
+# install.packages("geodata")
 library(rmarkdown)
 library(readxl)
 library(openxlsx)
@@ -15,14 +18,14 @@ source("setup_functions.R")
 # Only ONE should be uncommented or used at a time
 # ------------------------------------------------------------------------------
 
-file_path <- 'TO_DO/1756_Wolfe_2023.xlsx'
+file_path <- 'TO_DO/3000_SAPFLUXNET.xlsx'
 
 
 
 
 #### RUN update excel file to change to the new template and overwrite it ####
-update_excel_file("Kwp_database_template_14_05_2025.xlsx",
-file_path, file_path, desired_cols = desired_cols)
+# update_excel_file("Kwp_database_template_14_05_2025.xlsx",
+# file_path, file_path, desired_cols = desired_cols)
 
 # ------------------------------------------------------------------------------
 # STEP 2: Define output location and file naming

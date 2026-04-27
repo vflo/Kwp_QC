@@ -418,7 +418,7 @@ check_transformation <- function(df){
     } else if (Kwp_original_units %in% c("g/m²/h/MPa", "g/m2/h/MPa", "g m-2 h-1 MPa-1")) {
       return(abs(Kwp * 1e-3/3600 - Kwp_cor_ground) < 1e-3)
     } else if (Kwp_original_units %in% c("m³/m²/h/MPa", "m3/m2/h/MPa", "m3 m-2 h-1 MPa-1")) {
-      return(abs(Kwp * 1e3/3600 - Kwp_cor_Leaf) < 1e-3)
+      return(abs(Kwp * 1e3/3600 - Kwp_cor_ground) < 1e-3)
     } else if (Kwp_original_units %in% c("mmol/dm²/s/MPa", "mmol/dm2/s/MPa", "mmol dm-2 s-1 MPa-1")) {
       return(abs(Kwp * 1.8e-5/1e-2 - Kwp_cor_ground) < 1e-3)
     } else if (Kwp_original_units %in% c("mol/dm²/s/MPa", "mol/dm2/s/MPa", "mol dm-2 s-1 MPa-1")) {
@@ -456,6 +456,66 @@ check_transformation <- function(df){
     } else if (Kwp_original_units %in% c("g/cm²/h/MPa", "g/cm2/h/MPa", "g cm-2 h-1 MPa-1")) {
       return(abs(Kwp * 1e-3/3600/1e-4 - Kwp_cor_ground) < 1e-3)
     }
+  }else if (Level == "Wood") {
+    if (Kwp_original_units %in% c("mmol/m²/s/MPa", "mmol/m2/s/MPa", "mmol m-2 s-1 MPa-1")) {
+      return(abs(Kwp* 1.8e-5 - Kwp_cor_wood ) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/m²/s/MPa", "mol/m2/s/MPa", "mol m-2 s-1 MPa-1")) {
+      return(abs(Kwp* 0.018 - Kwp_cor_wood ) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/m²/s/MPa", "kg/m2/s/MPa", "kg m-2 s-1 MPa-1",
+                                         "l/m²/s/MPa", "l/m2/s/MPa", "l m-2 s-1 MPa-1")) {
+      return(abs(Kwp - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/m²/s/MPa", "g/m2/s/MPa", "g m-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1e-3 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("m³/m²/s/MPa", "m3/m2/s/MPa", "m3 m-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1e3 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mmol/m²/h/MPa", "mmol/m2/h/MPa", "mmol m-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1.8e-5/3600 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/m²/h/MPa", "mol/m2/h/MPa", "mol m-2 h-1 MPa-1")) {
+      return(abs(Kwp * 0.018/3600 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/m²/h/MPa", "kg/m2/h/MPa", "kg m-2 h-1 MPa-1",
+                                         "l/m²/h/MPa", "l/m2/h/MPa", "l m-2 h-1 MPa-1")) {
+      return(abs(Kwp / 3600 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/m²/h/MPa", "g/m2/h/MPa", "g m-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1e-3/3600 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("m³/m²/h/MPa", "m3/m2/h/MPa", "m3 m-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1e3/3600 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mmol/dm²/s/MPa", "mmol/dm2/s/MPa", "mmol dm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1.8e-5/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/dm²/s/MPa", "mol/dm2/s/MPa", "mol dm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 0.018/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/dm²/s/MPa", "kg/dm2/s/MPa", "kg dm-2 s-1 MPa-1",
+                                         "l/dm²/s/MPa", "l/dm2/s/MPa", "l dm-2 s-1 MPa-1")) {
+      return(abs(Kwp / 1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/dm²/s/MPa", "g/dm2/s/MPa", "g dm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1e-3/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mmol/dm²/h/MPa", "mmol/dm2/h/MPa", "mmol dm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1.8e-5/3600/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/dm²/h/MPa", "mol/dm2/h/MPa", "mol dm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 0.018/3600/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/dm²/h/MPa", "kg/dm2/h/MPa", "kg dm-2 h-1 MPa-1",
+                                         "l/dm²/h/MPa", "l/dm2/h/MPa", "l dm-2 h-1 MPa-1")) {
+      return(abs(Kwp /3600/1e-2 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/dm²/h/MPa", "g/dm2/h/MPa", "g dm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1e-3/3600/1e-2 - Kwp_cor_wood) < 1e-3)
+    }else if (Kwp_original_units %in% c("mmol/cm²/s/MPa", "mmol/cm2/s/MPa", "mmol cm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1.8e-5/1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/cm²/s/MPa", "mol/cm2/s/MPa", "mol cm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 0.018/1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/cm²/s/MPa", "kg/cm2/s/MPa", "kg cm-2 s-1 MPa-1",
+                                         "l/cm²/s/MPa", "l/cm2/s/MPa", "l cm-2 s-1 MPa-1")) {
+      return(abs(Kwp / 1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/cm²/s/MPa", "g/cm2/s/MPa", "g cm-2 s-1 MPa-1")) {
+      return(abs(Kwp * 1e-3/1e-4 - Kwp_cor_wood ) < 1e-3)
+    } else if (Kwp_original_units %in% c("mmol/cm²/h/MPa", "mmol/cm2/h/MPa", "mmol cm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1.8e-5/3600/1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("mol/cm²/h/MPa", "mol/cm2/h/MPa", "mol cm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 0.018/3600/1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("kg/cm²/h/MPa", "kg/cm2/h/MPa", "kg cm-2 h-1 MPa-1",
+                                         "l/cm²/h/MPa", "l/cm2/h/MPa", "l cm-2 h-1 MPa-1")) {
+      return(abs(Kwp /3600/1e-4 - Kwp_cor_wood) < 1e-3)
+    } else if (Kwp_original_units %in% c("g/cm²/h/MPa", "g/cm2/h/MPa", "g cm-2 h-1 MPa-1")) {
+      return(abs(Kwp * 1e-3/3600/1e-4 - Kwp_cor_wood) < 1e-3)
+    }
   }
   
   
@@ -480,11 +540,11 @@ check_Kwp_transformations <- function(row) {
   
   # Start by assuming no transformation
   result <- list(
-    Kwp_cor_Leaf = NA_real_,
-    Kwp_cor_sapwood = NA_real_,
-    Kwp_cor_plant = NA_real_,
-    Kwp_cor_wood = NA_real_,
-    Kwp_cor_ground = NA_real_
+    Kwp_cor_Leaf = NA_character_,
+    Kwp_cor_sapwood = NA_character_,
+    Kwp_cor_plant = NA_character_,
+    Kwp_cor_wood = NA_character_,
+    Kwp_cor_ground = NA_character_
   )
   
   if(level != "Leaf"){original_level <- tolower(level)
@@ -700,17 +760,17 @@ check_Kwp_transformations_correctness <- function(row, tolerance = 0.01) {
       plant_val <- validated_levels[["Plant"]]
       wood_target <- get_num("Kwp_cor_wood")
       
-      if (!is.na(st_basal_area) && st_basal_area != 0 && !is.na(density)) {
-        calculated_wood <- plant_val * (density / st_basal_area)
-        try_validate("Plant", "Wood", calculated_wood, wood_target)
-      } else if (!is.na(ba) && ba > 0) {
+      if (!is.na(ba) && ba > 0) {
         calculated_wood <- plant_val / ba
         try_validate("Plant", "Wood", calculated_wood, wood_target)
-      }else if (!is.na(dbh) && dbh > 0) {
+      } else if (!is.na(dbh) && dbh > 0) {
         ba_per_tree <- pi * ((dbh/100)^2)
         calculated_wood <- plant_val / ba_per_tree
         try_validate("Plant", "Wood", calculated_wood, wood_target)
-      } 
+      } else if (!is.na(st_basal_area) && st_basal_area != 0 && !is.na(density)) {
+        calculated_wood <- plant_val * (density / st_basal_area)
+        try_validate("Plant", "Wood", calculated_wood, wood_target)
+      }
     }
     
     # Multiple paths to GROUND
@@ -748,7 +808,7 @@ check_Kwp_transformations_correctness <- function(row, tolerance = 0.01) {
     }
   }
   
-  return(result)
+  return(lapply(result, as.character))
 }
 
 # ----------------------------------------------------------------------------
