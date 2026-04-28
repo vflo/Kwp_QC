@@ -68,4 +68,4 @@ Code in this repository is released under the [MIT License](LICENSE).
 
 ## Contact
 
-Víctor Flo — CREAF — `v.flo@creaf.uab.cat`
+Victor Flo - CREAF - `v.flo@creaf.uab.cat`
