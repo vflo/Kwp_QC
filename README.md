@@ -49,7 +49,7 @@ Tested with R ≥ 4.3 and Pandoc (bundled with RStudio).
 ## Usage
 
 The pipeline expects datasets to follow the structure of
-`Kwp_database_template_14_05_2025.xlsx`. Two entry points are provided:
+`Extraction_template.xlsx`. Two entry points are provided:
 
 1. **Single dataset (interactive)** — open `QC_Run_script.R`, set the path to
    the dataset, and run. The script renders `Data_Quality_Report.Rmd` and
@@ -58,7 +58,7 @@ The pipeline expects datasets to follow the structure of
    containing the datasets, and run. The script iterates over all `.xlsx`
    files matching the template and produces one HTML report per dataset.
 
-The HTML reports archived on Zenodo (folder `Qc_reports/`) were generated
+The HTML reports archived on Zenodo (compressed zip file `Qc_reports.zip`) were generated
 with this pipeline.
 
 ## Related repositories
