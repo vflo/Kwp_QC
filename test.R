@@ -1,8 +1,6 @@
-# Define expected_types and valid_ranges before this in setup_functions.R or load them dynamically
 
-# -----------------------------
 # Load Required Libraries
-# -----------------------------
+
 library(readxl)
 library(tibble)
 library(dplyr)
@@ -15,14 +13,14 @@ library(terra)
 library(rnaturalearth)
 library(geodata)
 
-# -----------------------------
-# ⚙️ Load Custom Functions
-# -----------------------------
+
+# Load Functions
+
 source("setup_functions.R")
 
-# -----------------------------
+
 # Load Data
-# -----------------------------
+
 
 file_path <- "test_that/404_Do_2008.xlsx"
 file_path <- "test_that/404_Do_2008_test_2.xlsx"
@@ -38,9 +36,9 @@ df <- read_excel(file_path,
 # file_name <- tools::file_path_sans_ext(basename(file_path))
 # df <- read_excel(file_path, sheet = "data", na = "NA")
 
-# -----------------------------
+
 # Contributor Info
-# -----------------------------
+
 contributors <- unique(na.omit(df$Contributor))
 contributor_text <- if (length(contributors) == 0) {
   "Not specified"
@@ -50,9 +48,9 @@ contributor_text <- if (length(contributors) == 0) {
 
 n_IDref <- length(unique(na.omit(df$IDref)))
 
-# -----------------------------
+
 # Type and Range Checks
-# -----------------------------
+
 qc_results <- list()
 
 for (col in names(expected_types)) {
@@ -100,9 +98,9 @@ for (col in names(expected_types)) {
 
 qc_summary <- bind_rows(qc_results)
 # View(qc_summary)
-# -----------------------------
+
 # Date Format Check
-# -----------------------------
+
 if ("Date" %in% names(df)) {
   date_status_vec <- check_date_format(df$Date)
   if (all(date_status_vec == "OK")) {
@@ -127,14 +125,14 @@ if ("Date" %in% names(df)) {
   }
 }
 
-# -----------------------------
+
 # Country Code Validation
-# -----------------------------
+
 result <- qc_check_country_codes(df)
 
-# -----------------------------
+
 # Unit Transformation Check
-# -----------------------------
+
 if ("Kwp" %in% names(df)) {
   transformation_results <- sapply(1:nrow(df), function(i) {
     row_df <- df[i, c("Kwp", "Level", "Kwp_original_units",
@@ -144,12 +142,10 @@ if ("Kwp" %in% names(df)) {
     check_transformation(row_df)
   })
   
-  # Contar solo los que son exactamente TRUE
   passed <- sum(transformation_results == TRUE)
   total <- length(transformation_results)
   transformation_check <- paste0(passed, "/", total, " passed")
   
-  # Opcional: ver los fallos
   failed_rows <- which(transformation_results != TRUE)
 } else {
   transformation_check <- "Kwp column not found."
@@ -157,9 +153,9 @@ if ("Kwp" %in% names(df)) {
 
 
 
-# -----------------------------
+
 # Available Transformations
-# -----------------------------
+
 valid_levels <- c("Leaf", "Sapwood", "Ground", "Plant", "Wood")
 invalid_levels <- df %>%
   filter(
@@ -183,16 +179,16 @@ safe_check <- function(i) {
   tryCatch(
     check_Kwp_transformations_correctness(as.list(df[i, ])),
     error = function(e) {
-      message(paste("❌ Error in row", i, ":", e$message))
+      message(paste("Error in row", i, ":", e$message))
       setNames(as.list(rep(NA, 5)), paste0("Kwp_cor_", c("Leaf", "sapwood", "plant", "wood", "ground")))
     }
   )
 }
 results_table <- purrr::map_dfr(1:nrow(df), safe_check)
 
-# -----------------------------
+
 # Report Sections
-# -----------------------------
+
 htmltools::HTML(sprintf(
   '<div style="margin-bottom: 20px;">
      <p><strong>Data Quality controlled by:</strong> %s</p>
@@ -249,9 +245,9 @@ if (nrow(bad_coords) > 0) {
   htmltools::HTML("<p>✅ All site coordinates are valid and located on land.</p>")
 }
 
-# -----------------------------
+
 # Transformation Summary
-# -----------------------------
+
 summary_html <- ""
 
 summary_html <- paste0(summary_html, "<h3>Original Level Units Transformation Check Summary</h3>")
@@ -334,9 +330,9 @@ if (grepl("\\d+/\\d+", transformation_check)) {
 
 cat(summary_html)
 
-# -----------------------------
+
 #  Kwp Consistency Check (Kwp = WaterFlux / deltaWP)
-# -----------------------------
+
 htmltools::HTML("<h3>Kwp Consistency Check</h3>")
 htmltools::HTML("<h5>Checks whether the reported Kwp equals WaterFlux divided by deltaWP.</h5>")
 
