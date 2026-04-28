@@ -2,7 +2,7 @@
 
 This repository contains the automated **quality-control (QC) pipeline** used
 to generate the per-dataset HTML reports archived alongside the
-[KPLANT database](https://github.com/vflo/Kplant_database) on Zenodo.
+[KPLANT database](https://zenodo.org/records/19816125) on Zenodo.
 
 > **Naming note.** The KPLANT database was originally referred to as *Kwp*
 > (whole-plant water-potential-derived hydraulic conductance) during data
