@@ -47,10 +47,10 @@ Tested with R ≥ 4.3 and Pandoc (bundled with RStudio).
 The pipeline expects datasets to follow the structure of
 `Extraction_template.xlsx`. Two entry points are provided:
 
-1. **Single dataset (interactive)** — open `QC_Run_script.R`, set the path to
+1. **Single dataset (interactive)** - open `QC_Run_script.R`, set the path to
    the dataset, and run. The script renders `Data_Quality_Report.Rmd` and
    produces an HTML QC report.
-2. **Batch (automated)** — open `QC_Run_auto_script.R`, set the folder
+2. **Batch (automated)** - open `QC_Run_auto_script.R`, set the folder
    containing the datasets, and run. The script iterates over all `.xlsx`
    files matching the template and produces one HTML report per dataset.
 
