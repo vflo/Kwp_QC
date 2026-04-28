@@ -35,8 +35,9 @@ git clone https://github.com/vflo/Kwp_QC.git
 Required R packages:
 
 ```r
-install.packages(c("readxl", "dplyr", "tidyr", "purrr", "stringr",
-                   "ggplot2", "rmarkdown", "knitr", "taxize", "testthat"))
+install.packages(c("readxl", "dplyr", "tidyr", "purrr", "stringr", "openxlsx",
+                   "writexl", "ggplot2", "rmarkdown", "knitr", "taxize", 
+                   "tibble", testthat"))
 ```
 
 Tested with R ≥ 4.3 and Pandoc (bundled with RStudio).
